@@ -1,25 +1,35 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12">
         <h1>Intelipost</h1>
       </v-col>
-      <v-col cols="6">
-        <p>{{ api }}</p>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <button @click="toggleSearch">Pesquisar</button>
+        <p>Searched: {{ controls.searched }}</p>
       </v-col>
+    </v-row>
+    <v-row v-if="controls.searched">
+      <nuxt-child></nuxt-child>
     </v-row>
   </v-container>
 </template>
 
 <script>
 export default {
-  asyncData(ctx) {
+  data() {
     return {
-      api: {
-        youtubeKey: ctx.env.youtubeApiKey,
-        ticketmasterKey: ctx.env.ticketmasterApiKey
+      controls: {
+        searched: false
       }
     };
+  },
+  methods: {
+    toggleSearch() {
+      this.controls.searched = !this.controls.searched;
+    }
   }
 };
 </script>

@@ -4,8 +4,8 @@ export default {
   env: {
     youtubeApiKey: 'AIzaSyDd_sfvQ4NASb-k0oKYAr_g9FZcQILtyKc',
     ticketmasterApiKey: 'q2GNlCrgGo6c8uej3Ib4MsbAC2KIr5nG',
-    youtubeApiUrl: 'https://www.googleapis.com/youtube/v3/',
-    ticketmasterApiUrl: 'https://app.ticketmaster.com/discovery/v2/'
+    youtubeApiUrl: 'https://www.googleapis.com/youtube/v3',
+    ticketmasterApiUrl: 'https://app.ticketmaster.com/discovery/v2'
   },
   mode: 'universal',
   /*

@@ -6,7 +6,7 @@
 
 <style lang="scss">
 main {
-  background-color: $inteli-green;
+  background-color: $background-page;
   height: 100vh;
   width: 100vw;
 }

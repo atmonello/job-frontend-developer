@@ -26,7 +26,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    {
+      lang: 'scss',
+      src: '~assets/global.scss'
+    }
+  ],
   styleResources: {
     // your settings here
     sass: [],

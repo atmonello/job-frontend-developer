@@ -1,12 +1,9 @@
 <template>
-  <main>
-    <nuxt />
-  </main>
+  <nuxt />
 </template>
 
 <style lang="scss">
 main {
-  background-color: $background-page;
   min-height: 100vh;
   width: 100vw;
 }

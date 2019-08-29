@@ -1,5 +1,5 @@
 <template>
-  <v-btn id="search-button">Pesquisar</v-btn>
+  <v-btn id="search-button" type="submit">Pesquisar</v-btn>
 </template>
 
 <style lang="scss" scoped>

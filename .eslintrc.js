@@ -15,10 +15,11 @@ module.exports = {
     'plugin:nuxt/recommended'
   ],
   plugins: [
-    'prettier'
+    'prettier',
+    'import'
   ],
   // add your custom rules here
   rules: {
-    'quotes': ['error', 'single', { 'allowTemplateLiterals': true }]
+    'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
   }
 }

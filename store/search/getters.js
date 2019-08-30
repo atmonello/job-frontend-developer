@@ -14,11 +14,19 @@ const getters = {
     return {
       name: artist.name,
       id: artist.id,
-      genre: artist.classifications[0].genre.name,
-      homepage: artist.externalLinks.homepage[0].url,
-      facebook: artist.externalLinks.facebook[0].url,
-      twitter: artist.externalLinks.twitter[0].url,
-      instagram: artist.externalLinks.instagram[0].url
+      genre: artist.classifications[0].genre.name || '',
+      homepage: artist.externalLinks
+        ? artist.externalLinks.homepage[0].url
+        : 'Não informado',
+      facebook: artist.externalLinks
+        ? artist.externalLinks.facebook[0].url
+        : 'Não informado',
+      twitter: artist.externalLinks
+        ? artist.externalLinks.twitter[0].url
+        : 'Não informado',
+      instagram: artist.externalLinks
+        ? artist.externalLinks.instagram[0].url
+        : 'Não informado'
     };
   }
 };

@@ -7,6 +7,9 @@ const actions = {
   },
   setSearchResult({ commit }, data) {
     commit('setSearchResult', data);
+  },
+  resetSearch({ commit }) {
+    commit('resetSearch');
   }
 };
 

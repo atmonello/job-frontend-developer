@@ -7,6 +7,11 @@ const mutations = {
   },
   setSearchResult(state, data) {
     state.searchResult = data;
+  },
+  resetSearch(state) {
+    state.searchResult = null;
+    state.query = '';
+    state.showResult = false;
   }
 };
 

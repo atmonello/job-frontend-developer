@@ -1,14 +1,20 @@
 <template>
-  <v-btn id="search-button" type="submit">Pesquisar</v-btn>
+  <v-btn dark large rounded depressed :disabled="!searchQuery">Pesquisar</v-btn>
 </template>
 
 <style lang="scss" scoped>
 button {
   display: inline-block;
-
-  &#search-button {
-    background-color: $inteli-green;
-    color: white;
-  }
 }
 </style>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+  computed: {
+    ...mapGetters({
+      searchQuery: 'search/getSearchQuery'
+    })
+  }
+};
+</script>

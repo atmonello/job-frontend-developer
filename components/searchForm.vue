@@ -10,6 +10,13 @@
   </form>
 </template>
 
+<style lang="scss" scoped>
+form {
+  user-select: none;
+  margin: 16px 0;
+}
+</style>
+
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import searchButton from './searchButton';
@@ -38,18 +45,22 @@ export default {
     }),
     searchTicketmaster() {
       this.toggleSearchResults(false);
-      this.$axios
-        .get(
-          `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
-        )
-        .then(response => {
-          this.toggleSearchResults(true);
-          this.result = response.data._embedded.attractions[0];
-          this.setSearchResult(this.result);
-        })
-        .catch(error => {
-          this.result = error.data;
-        });
+
+      if (this.searchQuery) {
+        this.$axios
+          .get(
+            `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
+          )
+          .then(response => {
+            this.toggleSearchResults(true);
+            this.result = response.data._embedded.attractions[0];
+            this.setSearchResult(this.result);
+            this.$router.push('/busca');
+          })
+          .catch(error => {
+            this.result = error.data;
+          });
+      }
     }
   }
 };

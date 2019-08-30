@@ -12,7 +12,7 @@ input {
   border-bottom: 2px solid $inteli-green;
   display: inline-block;
   padding: 8px;
-  color: $background-page;
+  color: $color-font-main;
 }
 </style>
 

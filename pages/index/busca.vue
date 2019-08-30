@@ -9,6 +9,9 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  validate({ store }) {
+    return store.state.search.result != null;
+  },
   computed: {
     ...mapGetters({
       searchResult: 'search/searchResult',

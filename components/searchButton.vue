@@ -1,5 +1,7 @@
 <template>
-  <v-btn dark large rounded depressed :disabled="!searchQuery">Pesquisar</v-btn>
+  <v-btn dark large rounded depressed :disabled="!searchQuery" type="submit"
+    >Pesquisar</v-btn
+  >
 </template>
 
 <style lang="scss" scoped>

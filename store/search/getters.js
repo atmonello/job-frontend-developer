@@ -9,25 +9,24 @@ const getters = {
     return state.query;
   },
   getArtistTicketMasterData(state) {
-    const artist = state.searchResult;
+    const artist = {};
+    const result = state.searchResult;
 
-    return {
-      name: artist.name,
-      id: artist.id,
-      genre: artist.classifications[0].genre.name || '',
-      homepage: artist.externalLinks
-        ? artist.externalLinks.homepage[0].url
-        : 'Não informado',
-      facebook: artist.externalLinks
-        ? artist.externalLinks.facebook[0].url
-        : 'Não informado',
-      twitter: artist.externalLinks
-        ? artist.externalLinks.twitter[0].url
-        : 'Não informado',
-      instagram: artist.externalLinks
-        ? artist.externalLinks.instagram[0].url
-        : 'Não informado'
-    };
+    artist.name = result.name;
+    artist.id = result.id;
+
+    if (result.classifications) {
+      artist.genre = result.classifications[0].genre.name;
+    }
+
+    if (result.externalLinks) {
+      artist.links = {};
+      Object.keys(result.externalLinks).map(key => {
+        artist.links[key] = result.externalLinks[key][0].url;
+      });
+    }
+
+    return artist;
   }
 };
 

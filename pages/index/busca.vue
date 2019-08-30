@@ -10,7 +10,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   validate({ store }) {
-    return store.state.search.result != null;
+    return store.state.search.searchResult != null;
   },
   computed: {
     ...mapGetters({

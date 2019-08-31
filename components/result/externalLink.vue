@@ -1,6 +1,6 @@
 <template>
   <li v-if="type !== 'musicbrainz'">
-    <a :href="info" target="_blank">
+    <a :href="info" target="_blank" :title="getLinkTitle(type)">
       <v-icon x-large>{{ `mdi-${getAlternateIcon(type)}` }}</v-icon>
     </a>
     <!-- <span>{{ info }}</span> -->
@@ -34,31 +34,38 @@ export default {
       swapIcons: [
         {
           original: 'wiki',
-          alternate: 'wikipedia'
+          alternate: 'wikipedia',
+          linkTitle: 'Wikipedia'
         },
         {
           original: 'twitter',
-          alternate: 'twitter-box'
+          alternate: 'twitter-box',
+          linkTitle: 'Twitter'
         },
         {
           original: 'facebook',
-          alternate: 'facebook-box'
+          alternate: 'facebook-box',
+          linkTitle: 'Facebook'
         },
         {
           original: 'lastfm',
-          alternate: 'lastfm'
+          alternate: 'lastfm',
+          linkTitle: 'Last.fm'
         },
         {
           original: 'instagram',
-          alternate: 'instagram'
+          alternate: 'instagram',
+          linkTitle: 'Instagram'
         },
         {
           original: 'itunes',
-          alternate: 'itunes'
+          alternate: 'itunes',
+          linkTitle: 'iTunes'
         },
         {
           original: 'homepage',
-          alternate: 'link-box-variant'
+          alternate: 'link-box-variant',
+          linkTitle: 'Site'
         }
       ]
     };
@@ -66,6 +73,9 @@ export default {
   methods: {
     getAlternateIcon(icon) {
       return this.swapIcons.filter(item => item.original === icon)[0].alternate;
+    },
+    getLinkTitle(icon) {
+      return this.swapIcons.filter(item => item.original === icon)[0].linkTitle;
     }
   }
 };

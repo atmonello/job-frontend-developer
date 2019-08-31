@@ -11,7 +11,6 @@
 <style lang="scss" scoped>
 main {
   max-height: 100vh;
-  overflow: hidden;
 
   #search-form {
     display: flex;
@@ -26,6 +25,10 @@ main {
       height: 100px;
       transition: all 500ms ease;
       flex-direction: row;
+      position: fixed;
+      top: 0;
+      z-index: 2;
+      width: 100%;
     }
   }
 }

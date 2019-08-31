@@ -16,6 +16,7 @@
   padding: 0 2rem;
   &.open-result {
     min-height: calc(100vh - 100px);
+    padding-top: 100px;
   }
 }
 </style>

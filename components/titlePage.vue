@@ -1,5 +1,5 @@
 <template>
-  <header class="d-flex justify-center">
+  <header>
     <h1 v-if="!showResults">Buscar Artista</h1>
     <v-btn
       v-else

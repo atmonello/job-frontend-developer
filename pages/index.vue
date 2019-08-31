@@ -1,17 +1,11 @@
 <template>
   <main>
-    <aside :class="{ openResult: showResults }">
+    <section id="search-form" :class="{ 'open-result': showResults }">
       <title-page></title-page>
       <search-form v-if="!showResults"></search-form>
-    </aside>
+    </section>
 
-    <v-container>
-      <v-row>
-        <v-col v-if="showResults" cols="9">
-          <nuxt-child></nuxt-child>
-        </v-col>
-      </v-row>
-    </v-container>
+    <nuxt-child></nuxt-child>
   </main>
 </template>
 
@@ -19,16 +13,17 @@
 main {
   max-height: 100vh;
   overflow: hidden;
-  aside {
-    background-color: $inteli-green; //hsl(72, 100%, 25%);
+
+  #search-form {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: $inteli-green; //hsl(72, 100%, 25%);
     height: 100vh;
     transition: all 500ms ease;
     flex-direction: column;
 
-    &.openResult {
+    &.open-result {
       height: 100px;
       transition: all 500ms ease;
       flex-direction: row;
@@ -40,7 +35,7 @@ main {
 <script>
 import { mapGetters } from 'vuex';
 import titlePage from '../components/titlePage';
-import searchForm from '../components/searchForm';
+import searchForm from '../components/form/searchForm';
 
 export default {
   components: {

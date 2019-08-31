@@ -1,21 +1,16 @@
 <template>
-  <header>
+  <header class="d-flex justify-center">
     <h1 v-if="!showResults">Buscar Artista</h1>
-    <v-container v-else>
-      <v-row>
-        <v-col cols="12">
-          <v-btn
-            dark
-            rounded
-            @click="
-              resetSearch();
-              backToIndex();
-            "
-            >Buscar novamente</v-btn
-          >
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-btn
+      v-else
+      dark
+      rounded
+      @click="
+        resetSearch();
+        backToIndex();
+      "
+      >Buscar novamente</v-btn
+    >
   </header>
 </template>
 

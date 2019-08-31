@@ -18,14 +18,11 @@ const getters = {
     const artist = {};
     const result = state.searchResult;
 
-    console.log('[getters] result', result);
-
     artist.name = result.name;
     artist.id = result.id;
 
     if (result.classifications) {
       artist.genre = result.classifications[0].genre.name;
-      console.log('[getters] genre', artist.genre);
     }
 
     if (result.externalLinks) {

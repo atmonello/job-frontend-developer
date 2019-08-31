@@ -70,10 +70,24 @@ export default {
               `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
             )
             .then(lfData => {
-              this.toggleSearchResults(true);
               this.$router.push('/busca');
-              console.log('lfData', lfData);
               this.setArtistBio(lfData.data.artist.bio.content);
+
+              const youtubeRequest = window.gapi.client.youtube.search.list({
+                part: 'snippet',
+                type: 'video',
+                q: encodeURIComponent(lfData.data.artist.name).replace(
+                  /%20/g,
+                  '+'
+                ),
+                maxResults: 10,
+                order: 'viewCount'
+              });
+
+              youtubeRequest.execute(response => {
+                this.toggleSearchResults(true);
+                console.log('youtube', response);
+              });
             });
         });
       }

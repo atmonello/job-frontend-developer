@@ -7,6 +7,7 @@
     </v-row>
     <artist-bio></artist-bio>
     <hr />
+    <videos-list></videos-list>
   </v-container>
 </template>
 
@@ -22,13 +23,15 @@
 <script>
 import { mapGetters } from 'vuex';
 import artistBio from '~/components/result/artistBio';
+import videosList from '~/components/result/videosList';
 
 export default {
   validate({ store }) {
     return store.state.search.searchResult != null;
   },
   components: {
-    artistBio
+    artistBio,
+    videosList
   },
   computed: {
     ...mapGetters({

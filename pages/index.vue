@@ -4,7 +4,6 @@
       <title-page></title-page>
       <search-form v-if="!showResults"></search-form>
     </section>
-
     <nuxt-child></nuxt-child>
   </main>
 </template>
@@ -44,8 +43,19 @@ export default {
   },
   computed: {
     ...mapGetters({
-      showResults: 'search/getSearchResultStatus'
+      showResults: 'search/getSearchResultStatus',
+      apiInfo: 'getApiInfo'
     })
+  },
+  mounted() {
+    window.gapi.load('client', () => {
+      window.gapi.client.init({
+        apiKey: this.apiInfo.youtubeApiKey
+      });
+      window.gapi.client.load('youtube', 'v3', function() {
+        // yt api is ready
+      });
+    });
   }
 };
 </script>

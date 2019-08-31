@@ -2,9 +2,9 @@ import colors from 'vuetify/es5/util/colors';
 
 export default {
   env: {
-    youtubeApiKey: 'AIzaSyDd_sfvQ4NASb-k0oKYAr_g9FZcQILtyKc',
+    youtubeApiKey: 'AIzaSyCJzhgB_VxXlarxrUXzkaXr0xO-Dmvc0zI',
     ticketmasterApiKey: 'q2GNlCrgGo6c8uej3Ib4MsbAC2KIr5nG',
-    youtubeApiUrl: 'https://www.googleapis.com/youtube/v3',
+    youtubeApiUrl: 'https://content.googleapis.com/youtube/v3',
     ticketmasterApiUrl: 'https://app.ticketmaster.com/discovery/v2',
     lastFmApiKey: '742619cd713c014891cce933b807a639',
     lastFmSharedSecret: '9b6ead8c9575f1c29f519927f68cd889',
@@ -32,6 +32,11 @@ export default {
         rel: 'stylesheet',
         href:
           'https://fonts.googleapis.com/css?family=Play:700&display=swap&subset=latin-ext'
+      }
+    ],
+    script: [
+      {
+        src: 'https://apis.google.com/js/api.js'
       }
     ]
   },

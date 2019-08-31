@@ -20,7 +20,7 @@ export const actions = {
   ...SearchActions,
   nuxtServerInit({ commit }, context) {
     commit('storeApiInfo', {
-      youtupeApiKey: context.env.youtubeApiKey,
+      youtubeApiKey: context.env.youtubeApiKey,
       ticketmasterApiKey: context.env.ticketmasterApiKey,
       youtubeApiUrl: context.env.youtubeApiUrl,
       ticketmasterApiUrl: context.env.ticketmasterApiUrl,

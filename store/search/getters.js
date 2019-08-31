@@ -43,6 +43,17 @@ const getters = {
     }
 
     return artist;
+  },
+  getVideosList(state) {
+    const _videos = [];
+
+    if (state.videosList) {
+      state.videosList.map(item => {
+        _videos.push(item.snippet);
+      });
+    }
+
+    return _videos;
   }
 };
 

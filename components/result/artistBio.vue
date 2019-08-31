@@ -6,7 +6,7 @@
           <div class="artist-bio-text">
             {{ artistBio }}
           </div>
-          <div v-if="!toggleFullBio" class="artist-bio-hide">
+          <div v-if="!toggleFullBio" class="artist-bio-expand">
             <v-btn outlined rounded @click="showFullBio">Ler mais</v-btn>
           </div>
         </div>
@@ -40,11 +40,11 @@
 
     &.show-full-bio {
       overflow-y: auto;
-      height: 300px;
+      height: 450px;
       transition: height 0.5s ease;
     }
 
-    &-hide {
+    &-expand {
       position: absolute;
       z-index: 1;
       bottom: 0;

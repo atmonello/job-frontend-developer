@@ -3,7 +3,8 @@ const state = () => {
     showResult: false,
     query: '',
     artistBio: '',
-    searchResult: null
+    searchResult: null,
+    videosList: []
   };
 };
 

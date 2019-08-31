@@ -42,7 +42,8 @@ export default {
     ...mapActions({
       toggleSearchResults: 'search/toggleSearchResults',
       setSearchResult: 'search/setSearchResult',
-      setArtistBio: 'search/setArtistBio'
+      setArtistBio: 'search/setArtistBio',
+      setVideosList: 'search/setVideosList'
     }),
     searchTicketmaster() {
       this.toggleSearchResults(false);
@@ -76,17 +77,14 @@ export default {
               const youtubeRequest = window.gapi.client.youtube.search.list({
                 part: 'snippet',
                 type: 'video',
-                q: encodeURIComponent(lfData.data.artist.name).replace(
-                  /%20/g,
-                  '+'
-                ),
+                q: lfData.data.artist.name,
                 maxResults: 10,
                 order: 'viewCount'
               });
 
               youtubeRequest.execute(response => {
+                this.setVideosList(response.items);
                 this.toggleSearchResults(true);
-                console.log('youtube', response);
               });
             });
         });

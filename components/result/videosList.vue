@@ -1,7 +1,11 @@
 <template>
-  <section>
+  <section class="video-list">
     <h5>Video List</h5>
-    <video-item></video-item>
+    <video-item
+      v-for="(item, index) in videos"
+      :key="index"
+      :video="item"
+    ></video-item>
   </section>
 </template>
 
@@ -10,6 +14,12 @@ import videoItem from './videoItem';
 export default {
   components: {
     videoItem
+  },
+  props: {
+    videos: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>

@@ -11,11 +11,15 @@ const mutations = {
   setArtistBio(state, data) {
     state.artistBio = data;
   },
+  setVideosList(state, data) {
+    state.videosList = data;
+  },
   resetSearch(state) {
     state.showResult = false;
     state.query = '';
     state.searchResult = null;
     state.artistBio = '';
+    state.videosList = [];
   }
 };
 

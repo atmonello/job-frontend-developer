@@ -7,7 +7,7 @@
     </v-row>
     <artist-bio></artist-bio>
     <hr />
-    <videos-list></videos-list>
+    <videos-list :videos="videosList"></videos-list>
   </v-container>
 </template>
 
@@ -36,7 +36,8 @@ export default {
   computed: {
     ...mapGetters({
       showResults: 'search/getSearchResultStatus',
-      artistTicketmasterData: 'search/getArtistTicketMasterData'
+      artistTicketmasterData: 'search/getArtistTicketMasterData',
+      videosList: 'search/getVideosList'
     })
   }
 };

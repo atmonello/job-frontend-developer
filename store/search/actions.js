@@ -11,6 +11,9 @@ const actions = {
   setArtistBio({ commit }, data) {
     commit('setArtistBio', data);
   },
+  setVideosList({ commit }, data) {
+    commit('setVideosList', data);
+  },
   resetSearch({ commit }) {
     commit('resetSearch');
   }

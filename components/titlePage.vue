@@ -6,8 +6,8 @@
       dark
       rounded
       @click="
-        resetSearch();
         backToIndex();
+        resetSearch();
       "
       >Buscar novamente</v-btn
     >

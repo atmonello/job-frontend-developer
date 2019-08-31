@@ -41,25 +41,41 @@ export default {
   methods: {
     ...mapActions({
       toggleSearchResults: 'search/toggleSearchResults',
-      setSearchResult: 'search/setSearchResult'
+      setSearchResult: 'search/setSearchResult',
+      setArtistBio: 'search/setArtistBio'
     }),
     searchTicketmaster() {
       this.toggleSearchResults(false);
 
       if (this.searchQuery) {
-        this.$axios
-          .get(
-            `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
-          )
-          .then(response => {
-            this.toggleSearchResults(true);
-            this.result = response.data._embedded.attractions[0];
-            this.setSearchResult(this.result);
-            this.$router.push('/busca');
-          })
-          .catch(error => {
-            this.result = error.data;
+        const getArtistTicketMaster = () =>
+          new Promise((resolve, reject) => {
+            this.$axios
+              .get(
+                `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
+              )
+              .then(response => {
+                resolve(response.data._embedded.attractions[0]);
+              })
+              .catch(error => {
+                reject(error);
+              });
           });
+
+        getArtistTicketMaster().then(tmData => {
+          this.result = tmData;
+          this.setSearchResult(this.result);
+          this.$axios
+            .get(
+              `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
+            )
+            .then(lfData => {
+              this.toggleSearchResults(true);
+              this.$router.push('/busca');
+              console.log('lfData', lfData);
+              this.setArtistBio(lfData.data.artist.bio.content);
+            });
+        });
       }
     }
   }

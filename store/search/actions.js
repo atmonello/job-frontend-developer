@@ -8,6 +8,9 @@ const actions = {
   setSearchResult({ commit }, data) {
     commit('setSearchResult', data);
   },
+  setArtistBio({ commit }, data) {
+    commit('setArtistBio', data);
+  },
   resetSearch({ commit }) {
     commit('resetSearch');
   }

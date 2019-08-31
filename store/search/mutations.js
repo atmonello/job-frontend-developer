@@ -8,10 +8,14 @@ const mutations = {
   setSearchResult(state, data) {
     state.searchResult = data;
   },
+  setArtistBio(state, data) {
+    state.artistBio = data;
+  },
   resetSearch(state) {
-    state.searchResult = null;
-    state.query = '';
     state.showResult = false;
+    state.query = '';
+    state.searchResult = null;
+    state.artistBio = '';
   }
 };
 

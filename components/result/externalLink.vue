@@ -1,6 +1,6 @@
 <template>
   <li v-if="type !== 'musicbrainz'">
-    <a :href="info">
+    <a :href="info" target="_blank">
       <v-icon x-large>{{ `mdi-${getAlternateIcon(type)}` }}</v-icon>
     </a>
     <!-- <span>{{ info }}</span> -->

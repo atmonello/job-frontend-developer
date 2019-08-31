@@ -23,7 +23,10 @@ export const actions = {
       youtupeApiKey: context.env.youtubeApiKey,
       ticketmasterApiKey: context.env.ticketmasterApiKey,
       youtubeApiUrl: context.env.youtubeApiUrl,
-      ticketmasterApiUrl: context.env.ticketmasterApiUrl
+      ticketmasterApiUrl: context.env.ticketmasterApiUrl,
+      lastFmApiKey: context.env.lastFmApiKey,
+      lastFmSharedSecret: context.env.lastFmSharedSecret,
+      lastFmApiUrl: context.env.lastFmApiUrl
     });
   }
 };

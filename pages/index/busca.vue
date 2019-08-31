@@ -5,22 +5,16 @@
         <h2 class="text-center">{{ artistTicketmasterData.name }}</h2>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row class="artist">
       <v-col cols="9">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor,
-        voluptate cupiditate! Velit praesentium dignissimos, labore cum
-        accusantium tempore dolore quibusdam, exercitationem tempora illum
-        voluptates autem ut a repellendus? Suscipit, excepturi? Lorem, ipsum
-        dolor sit amet consectetur adipisicing elit. Voluptatum, perspiciatis!
-        Tenetur doloremque vero quis sed, id repudiandae cupiditate odit,
-        inventore nemo dolorum, ipsum quam impedit qui voluptatem fugit amet
-        neque. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur
-        culpa quisquam debitis repellat vel aut iste neque tempore incidunt
-        pariatur. Eligendi enim blanditiis voluptas qui ut, aut tenetur harum
-        nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Aliquam veniam exercitationem voluptates autem. Illo ad non eos vero
-        cumque repellendus maxime, dolor, quisquam aperiam nobis praesentium,
-        sapiente beatae quia sint.
+        <div class="artist-bio" :class="{ 'show-full-bio': toggleFullBio }">
+          <div class="artist-bio-text">
+            {{ artistBio }}
+          </div>
+          <div v-if="!toggleFullBio" class="artist-bio-hide">
+            <v-btn outlined rounded @click="showFullBio">Ler mais</v-btn>
+          </div>
+        </div>
       </v-col>
       <v-col v-if="showResults" class="artist-links" cols="3">
         <h6>Links</h6>
@@ -32,23 +26,54 @@
             :info="item"
           ></external-link>
         </ul>
+        <h6>Gênero</h6>
+        <p>{{ artistTicketmasterData.genre }}</p>
       </v-col>
     </v-row>
+    <hr />
   </v-container>
 </template>
 
 <style lang="scss" scoped>
 #search-result {
-  // display: flex;
-  // justify-content: center;
-  // align-items: flex-start;
-  // flex-direction: column;
   padding: 0 2rem;
 
-  .artist-links {
-    ul {
-      display: flex;
-      justify-content: space-around;
+  .artist {
+    &-bio {
+      overflow-y: hidden;
+      height: 150px;
+      line-height: 1.75;
+      position: relative;
+      padding: 16px 24px;
+
+      &.show-full-bio {
+        overflow-y: auto;
+        height: 300px;
+        transition: height 0.5s ease;
+      }
+
+      &-hide {
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: linear-gradient(0deg, white, white, transparent);
+        height: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+    }
+    &-links {
+      ul {
+        display: flex;
+        justify-content: space-around;
+      }
+      p {
+        text-align: center;
+      }
     }
   }
 
@@ -69,12 +94,22 @@ export default {
   components: {
     externalLink
   },
+  data() {
+    return {
+      toggleFullBio: false
+    };
+  },
   computed: {
     ...mapGetters({
       showResults: 'search/getSearchResultStatus',
-      searchResult: 'search/searchResult',
-      artistTicketmasterData: 'search/getArtistTicketMasterData'
+      artistTicketmasterData: 'search/getArtistTicketMasterData',
+      artistBio: 'search/getArtistBio'
     })
+  },
+  methods: {
+    showFullBio() {
+      this.toggleFullBio = !this.toggleFullBio;
+    }
   }
 };
 </script>

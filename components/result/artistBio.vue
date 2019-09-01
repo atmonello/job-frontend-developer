@@ -1,7 +1,7 @@
 <template>
   <div class="artist">
     <v-row>
-      <v-col cols="9">
+      <v-col xs="12" sm="9">
         <div class="artist-bio" :class="{ 'show-full-bio': toggleFullBio }">
           <div class="artist-bio-text">
             {{ artistBio }}
@@ -11,18 +11,22 @@
           </div>
         </div>
       </v-col>
-      <v-col v-if="showResults" class="artist-links" cols="3">
-        <h6>Links</h6>
-        <ul>
-          <external-link
-            v-for="(item, key, index) in artistTicketmasterData.links"
-            :key="index"
-            :type="key"
-            :info="item"
-          ></external-link>
-        </ul>
-        <h6>Gênero</h6>
-        <p>{{ artistTicketmasterData.genre }}</p>
+      <v-col v-if="showResults" class="artist-links" xs="12" sm="3">
+        <div class="artist-links--list">
+          <h6>Links</h6>
+          <ul>
+            <external-link
+              v-for="(item, key, index) in artistTicketmasterData.links"
+              :key="index"
+              :type="key"
+              :info="item"
+            ></external-link>
+          </ul>
+        </div>
+        <div class="artist-links--genre">
+          <h6>Gênero</h6>
+          <p>{{ artistTicketmasterData.genre }}</p>
+        </div>
       </v-col>
     </v-row>
   </div>
@@ -32,7 +36,7 @@
 .artist {
   margin-bottom: 16px;
   &-bio {
-    overflow-y: hidden;
+    overflow: hidden;
     height: 150px;
     line-height: 1.75;
     position: relative;
@@ -67,6 +71,13 @@
     }
     p {
       text-align: center;
+    }
+    @media screen and (max-width: 600px) {
+      text-align: center;
+      &--list,
+      &--genre {
+        display: inline-block;
+      }
     }
   }
 }

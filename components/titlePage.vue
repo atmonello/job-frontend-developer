@@ -5,6 +5,12 @@
   </header>
 </template>
 
+<style lang="scss" scoped>
+header {
+  user-select: none;
+}
+</style>
+
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {

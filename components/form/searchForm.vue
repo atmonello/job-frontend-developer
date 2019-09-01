@@ -37,17 +37,26 @@ form {
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     display: inline-block;
+    position: absolute;
+    right: -60px;
+    top: 0;
+    display: block;
+    width: 50px;
+    height: 50px;
   }
 
   @keyframes no-artist {
     0% {
       margin-right: 0;
+      pointer-events: none;
     }
     25% {
-      margin-right: 25px;
+      margin-right: 15px;
+      pointer-events: none;
     }
     75% {
-      margin-right: -25px;
+      margin-right: -15px;
+      pointer-events: none;
     }
     100% {
       margin-right: 0;

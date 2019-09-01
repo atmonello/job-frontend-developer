@@ -1,44 +1,58 @@
 <template>
   <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      {{ pageNotFound }}
-    </h1>
-    <h1 v-else>
-      {{ otherError }}
-    </h1>
-    <NuxtLink to="/">
-      Home page
-    </NuxtLink>
+    <v-container>
+      <v-row>
+        <v-col>
+          <h4 v-if="error.statusCode === 404">
+            {{ pageNotFound }}
+          </h4>
+          <h4 v-else-if="!hasSearchResult">
+            {{ emptySearchResult }}
+          </h4>
+          <h4 v-else>
+            {{ otherError }}
+          </h4>
+          <NuxtLink to="/">
+            Voltar
+          </NuxtLink>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
 <script>
 export default {
-  layout: 'empty',
   props: {
     error: {
       type: Object,
       default: null
     }
   },
+  data() {
+    return {
+      pageNotFound: '404 Não encontrado',
+      otherError: 'Ocorreu um erro',
+      emptySearchResult: 'Faça uma nova busca'
+    };
+  },
+  asyncData({ store }) {
+    const hasSearchResult = store.state.search.searchResult != null;
+    return { hasSearchResult };
+  },
+  layout: 'empty',
   head() {
     const title =
       this.error.statusCode === 404 ? this.pageNotFound : this.otherError;
     return {
       title
     };
-  },
-  data() {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    };
   }
 };
 </script>
 
 <style scoped>
-h1 {
-  font-size: 20px;
+.container {
+  text-align: center;
 }
 </style>

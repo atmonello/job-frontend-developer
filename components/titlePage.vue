@@ -1,16 +1,7 @@
 <template>
   <header>
     <h1 v-if="!showResults">Buscar Artista</h1>
-    <v-btn
-      v-else
-      dark
-      rounded
-      @click="
-        backToIndex();
-        resetSearch();
-      "
-      >Buscar novamente</v-btn
-    >
+    <v-btn v-else dark rounded @click="backToIndex">Buscar novamente</v-btn>
   </header>
 </template>
 
@@ -24,10 +15,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      resetSearch: 'search/resetSearch'
+      toggleSerchResults: 'search/toggleSearchResults'
     }),
     backToIndex() {
       this.$nuxt.$router.push('/');
+      this.toggleSerchResults();
     }
   }
 };

@@ -18,11 +18,11 @@ const mutations = {
     state.loadingSearch = data;
   },
   resetSearch(state) {
-    state.showResult = false;
     state.query = '';
     state.searchResult = null;
     state.artistBio = '';
     state.videosList = [];
+    state.showResult = false;
   }
 };
 

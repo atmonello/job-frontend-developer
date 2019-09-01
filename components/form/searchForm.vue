@@ -128,7 +128,6 @@ export default {
                 `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
               )
               .then(lfData => {
-                this.$router.push('/busca');
                 this.setArtistBio(lfData.data.artist.bio.content);
 
                 const youtubeRequest = window.gapi.client.youtube.search.list({

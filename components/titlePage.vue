@@ -15,11 +15,13 @@ export default {
   },
   methods: {
     ...mapActions({
-      toggleSerchResults: 'search/toggleSearchResults'
+      // toggleSerchResults: 'search/toggleSearchResults',
+      resetSearch: 'search/resetSearch'
     }),
     backToIndex() {
       this.$nuxt.$router.push('/');
-      this.toggleSerchResults();
+      // this.toggleSerchResults();
+      this.resetSearch();
     }
   }
 };

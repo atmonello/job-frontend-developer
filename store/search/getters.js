@@ -49,7 +49,12 @@ const getters = {
 
     if (state.videosList) {
       state.videosList.map(item => {
-        _videos.push(item.snippet);
+        const video = {
+          data: item.snippet,
+          url: `http://www.youtube.com/embed/${item.id.videoId}`
+        };
+
+        _videos.push(video);
       });
     }
 

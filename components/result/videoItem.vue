@@ -1,25 +1,48 @@
 <template>
   <div class="video-list-item">
     <div class="video-list-item--thumbnail">
-      <img
-        :src="video.thumbnails.medium.url"
-        :alt="video.title"
-        :width="video.thumbnails.medium.width"
-        :height="video.thumbnails.medium.height"
+      <!-- <a :href="videoUrl">
+        <img
+          :src="videoData.thumbnails.medium.url"
+          :alt="videoData.title"
+          :width="
+            videoData.thumbnails.medium.width
+              ? videoData.thumbnails.medium.width
+              : videoData.thumbnails.default.width
+          "
+          :height="
+            videoData.thumbnails.medium.height
+              ? videoData.thumbnails.medium.height
+              : videoData.thumbnails.default.height
+          "
+        />
+      </a> -->
+      <iframe
+        id="ytplayer"
+        type="text/html"
+        width="640"
+        height="360"
+        :src="videoUrl"
+        frameborder="0"
       />
     </div>
     <div class="video-list-item--info">
-      <h5>{{ video.title }}</h5>
+      <h5>{{ videoData.title }}</h5>
       <div class="video-list-item--info--upload">
         <v-icon>mdi-video-account</v-icon>
-        <span>{{ video.channelTitle }}</span>
+        <span>{{ videoData.channelTitle }}</span>
         <v-icon>mdi-calendar-range</v-icon>
-        <span>Publicado em {{ $getFormattedDate(video.publishedAt) }}</span>
+        <span>Publicado em {{ $getFormattedDate(videoData.publishedAt) }}</span>
       </div>
       <p></p>
-      <p>{{ video.description }}</p>
+      <p>{{ videoData.description }}</p>
       <!-- <p>{{ video }}</p> -->
     </div>
+    <!-- <p>{{ videoUrl }}</p>
+    <video controls="true">
+      <source :src="videoUrl" type="video/mp4" />
+    </video> -->
+    <!-- <video :src="videoUrl" controls="true"></video> -->
   </div>
 </template>
 
@@ -33,7 +56,6 @@
   }
   &:hover {
     background-color: $background-alternate-video-item--hover;
-    cursor: pointer;
   }
 
   &--thumbnail,
@@ -42,6 +64,9 @@
   }
 
   &--info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     * {
       text-align: left;
     }
@@ -58,8 +83,12 @@
 <script>
 export default {
   props: {
-    video: {
+    videoData: {
       type: Object,
+      required: true
+    },
+    videoUrl: {
+      type: String,
       required: true
     }
   }

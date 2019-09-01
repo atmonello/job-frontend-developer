@@ -4,7 +4,8 @@
     <video-item
       v-for="(item, index) in videos"
       :key="index"
-      :video="item"
+      :video-data="item.data"
+      :video-url="item.url"
     ></video-item>
   </section>
 </template>

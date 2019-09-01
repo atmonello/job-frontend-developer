@@ -59,6 +59,9 @@ const getters = {
     }
 
     return _videos;
+  },
+  getLoadingSearch(state) {
+    return state.loadingSearch;
   }
 };
 

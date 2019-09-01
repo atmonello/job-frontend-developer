@@ -14,6 +14,9 @@ const actions = {
   setVideosList({ commit }, data) {
     commit('setVideosList', data);
   },
+  setLoadingSearch({ commit }, data) {
+    commit('setLoadingSearch', data);
+  },
   resetSearch({ commit }) {
     commit('resetSearch');
   }

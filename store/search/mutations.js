@@ -14,6 +14,9 @@ const mutations = {
   setVideosList(state, data) {
     state.videosList = data;
   },
+  setLoadingSearch(state, data) {
+    state.loadingSearch = data;
+  },
   resetSearch(state) {
     state.showResult = false;
     state.query = '';

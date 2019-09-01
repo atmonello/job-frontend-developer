@@ -2,11 +2,18 @@
   <form
     :justify="'justify'"
     :align="'center'"
-    @submit.prevent="searchTicketmaster"
+    :class="{ 'no-artist': noArtist }"
+    @submit.prevent="searchArtist"
   >
     <!-- <p>{{ api }}</p> -->
     <search-bar></search-bar>
     <search-button></search-button>
+    <span v-if="loadingSearch" class="loading-icon">
+      <v-icon x-large>mdi-loading</v-icon>
+    </span>
+    <v-snackbar v-model="noArtist" :timeout="3000"
+      >Não encontrado! Tente novamente.</v-snackbar
+    >
   </form>
 </template>
 
@@ -14,6 +21,47 @@
 form {
   user-select: none;
   margin: 16px 0;
+  position: relative;
+
+  &.no-artist {
+    animation: no-artist;
+    animation-duration: 0.25s;
+    animation-iteration-count: 3;
+    animation-fill-mode: forwards;
+  }
+
+  .loading-icon {
+    animation: loading-icon;
+    animation-duration: 1s;
+    // animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    display: inline-block;
+  }
+
+  @keyframes no-artist {
+    0% {
+      margin-right: 0;
+    }
+    25% {
+      margin-right: 25px;
+    }
+    75% {
+      margin-right: -25px;
+    }
+    100% {
+      margin-right: 0;
+    }
+  }
+
+  @keyframes loading-icon {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
 </style>
 
@@ -29,13 +77,15 @@ export default {
   },
   data() {
     return {
-      result: null
+      result: null,
+      noArtist: false
     };
   },
   computed: {
     ...mapGetters({
       searchQuery: 'search/getSearchQuery',
-      apiInfo: 'getApiInfo'
+      apiInfo: 'getApiInfo',
+      loadingSearch: 'search/getLoadingSearch'
     })
   },
   methods: {
@@ -43,12 +93,18 @@ export default {
       toggleSearchResults: 'search/toggleSearchResults',
       setSearchResult: 'search/setSearchResult',
       setArtistBio: 'search/setArtistBio',
-      setVideosList: 'search/setVideosList'
+      setVideosList: 'search/setVideosList',
+      setLoadingSearch: 'search/setLoadingSearch'
     }),
-    searchTicketmaster() {
+    searchNoArtist() {
+      this.noArtist = true;
+      this.setLoadingSearch(false);
+    },
+    searchArtist() {
       this.toggleSearchResults(false);
 
       if (this.searchQuery) {
+        this.setLoadingSearch(true);
         const getArtistTicketMaster = () =>
           new Promise((resolve, reject) => {
             this.$axios
@@ -63,31 +119,39 @@ export default {
               });
           });
 
-        getArtistTicketMaster().then(tmData => {
-          this.result = tmData;
-          this.setSearchResult(this.result);
-          this.$axios
-            .get(
-              `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
-            )
-            .then(lfData => {
-              this.$router.push('/busca');
-              this.setArtistBio(lfData.data.artist.bio.content);
+        getArtistTicketMaster()
+          .then(tmData => {
+            this.result = tmData;
+            this.setSearchResult(this.result);
+            this.$axios
+              .get(
+                `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
+              )
+              .then(lfData => {
+                this.$router.push('/busca');
+                this.setArtistBio(lfData.data.artist.bio.content);
 
-              const youtubeRequest = window.gapi.client.youtube.search.list({
-                part: 'snippet',
-                type: 'video',
-                q: lfData.data.artist.name,
-                maxResults: 10,
-                order: 'viewCount'
-              });
+                const youtubeRequest = window.gapi.client.youtube.search.list({
+                  part: 'snippet',
+                  type: 'video',
+                  q: lfData.data.artist.name,
+                  maxResults: 10,
+                  order: 'viewCount'
+                });
 
-              youtubeRequest.execute(response => {
-                this.setVideosList(response.items);
-                this.toggleSearchResults(true);
+                youtubeRequest.execute(response => {
+                  this.setVideosList(response.items);
+                  this.toggleSearchResults(true);
+                  this.setLoadingSearch(false);
+                });
+              })
+              .catch(() => {
+                this.searchNoArtist();
               });
-            });
-        });
+          })
+          .catch(() => {
+            this.searchNoArtist();
+          });
       }
     }
   }

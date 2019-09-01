@@ -1,22 +1,7 @@
 <template>
+  <!-- v-expansion-panel -->
   <div class="video-list-item">
     <div class="video-list-item--thumbnail">
-      <!-- <a :href="videoUrl">
-        <img
-          :src="videoData.thumbnails.medium.url"
-          :alt="videoData.title"
-          :width="
-            videoData.thumbnails.medium.width
-              ? videoData.thumbnails.medium.width
-              : videoData.thumbnails.default.width
-          "
-          :height="
-            videoData.thumbnails.medium.height
-              ? videoData.thumbnails.medium.height
-              : videoData.thumbnails.default.height
-          "
-        />
-      </a> -->
       <iframe
         id="ytplayer"
         type="text/html"
@@ -36,13 +21,7 @@
       </div>
       <p></p>
       <p>{{ videoData.description }}</p>
-      <!-- <p>{{ video }}</p> -->
     </div>
-    <!-- <p>{{ videoUrl }}</p>
-    <video controls="true">
-      <source :src="videoUrl" type="video/mp4" />
-    </video> -->
-    <!-- <video :src="videoUrl" controls="true"></video> -->
   </div>
 </template>
 

@@ -4,7 +4,8 @@ const state = () => {
     query: '',
     artistBio: '',
     searchResult: null,
-    videosList: []
+    videosList: [],
+    loadingSearch: false
   };
 };
 

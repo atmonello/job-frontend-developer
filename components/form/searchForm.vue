@@ -149,10 +149,13 @@ export default {
         this.setLoadingSearch(true);
         const getArtistTicketMaster = () =>
           new Promise((resolve, reject) => {
+            const tmURL = `${
+              this.apiInfo.ticketmasterApiUrl
+            }/attractions.json?keyword=${this.searchQuery.trim()}&size=1&apikey=${
+              this.apiInfo.ticketmasterApiKey
+            }`;
             this.$axios
-              .get(
-                `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
-              )
+              .get(tmURL)
               .then(response => {
                 resolve(response.data._embedded.attractions[0]);
               })
@@ -165,10 +168,9 @@ export default {
           .then(tmData => {
             this.result = tmData;
             this.setSearchResult(this.result);
+            const lfURL = `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`;
             this.$axios
-              .get(
-                `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
-              )
+              .get(lfURL)
               .then(lfData => {
                 this.setArtistBio(lfData.data.artist.bio.content);
 

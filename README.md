@@ -2,21 +2,18 @@
 
 > Teste prático para Frontend Javascript Developer
 
-## Build Setup
+## Como acessar
 
-``` bash
-# install dependencies
-$ npm run install
+Basta acessar o link [http://atmonello-intelipost.surge.sh/](http://atmonello-intelipost.surge.sh/).
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+## Como rodar localmente
 
-# build for production and launch server
-$ npm run build
-$ npm run start
+Acessar a pasta do projeto clonado e executar o comando `npm run dev` para subir o servidor local de desenvolvimento. 
 
-# generate static project
-$ npm run generate
-```
+> ### Build de produção
+> Para buildar para produção, use o comando `npm run generate` para gerar os arquivos estáticos e subir em algum serviço de hospedagem
+> Durante o desenvolvimento foi utilizado o [Surge](https://surge.sh/), bastando instalá-lo com `npm i -g surge` e, depois do build, `surge dist/`
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## Tecnologias utilizadas
+
+O projeto foi desenvolvido usando o [Nuxt.js](https://nuxtjs.org) e [Vuetify](https://vuetifyjs.com).

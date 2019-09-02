@@ -1,6 +1,5 @@
 <template>
   <section class="video-list">
-    <h5>Video List</h5>
     <video-item
       v-for="(item, index) in videos"
       :key="index"

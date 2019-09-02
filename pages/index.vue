@@ -5,15 +5,16 @@
       <search-form v-if="!showResults"></search-form>
     </section>
     <section v-if="showResults" id="search-result">
-      <v-container :class="{ 'open-result': showResults }">
+      <v-container fluid :class="{ 'open-result': showResults }">
         <v-row>
           <v-col cols="12">
             <h2 class="text-center">{{ artistTicketmasterData.name }}</h2>
           </v-col>
         </v-row>
         <artist-bio></artist-bio>
-        <hr />
-        <videos-list :videos="videosList"></videos-list>
+        <v-row>
+          <videos-list :videos="videosList"></videos-list>
+        </v-row>
       </v-container>
     </section>
   </main>
@@ -21,7 +22,9 @@
 
 <style lang="scss" scoped>
 main {
-  max-height: 100vh;
+  @media screen and (max-width: 600px) {
+    width: 100vw;
+  }
 
   #search-form {
     display: flex;
@@ -44,7 +47,6 @@ main {
   }
 
   #search-result {
-    padding: 0 2rem;
     min-height: calc(100vh - 100px);
     padding-top: 100px;
   }

@@ -5,11 +5,26 @@
     :class="{ 'no-artist': noArtist }"
     @submit.prevent="searchArtist"
   >
-    <!-- <p>{{ api }}</p> -->
-    <search-bar></search-bar>
-    <search-button></search-button>
-    <span v-if="loadingSearch" class="loading-icon">
-      <v-icon x-large>mdi-loading</v-icon>
+    <div id="search-form-item--bar">
+      <!-- <input
+        type="text"
+        placeholder="Digite um artista"
+        @input="updateSearchQuery($event.target.value)"
+      /> -->
+      <v-text-field
+        light
+        append-icon="mdi-magnify"
+        messages="Digite um artista"
+        @input.native="updateSearchQuery($event.target.value)"
+      ></v-text-field>
+    </div>
+    <div id="search-form-item--button">
+      <v-btn dark large rounded depressed :disabled="!searchQuery" type="submit"
+        >Pesquisar</v-btn
+      >
+    </div>
+    <span class="loading-icon">
+      <v-icon v-if="loadingSearch" x-large>mdi-loading</v-icon>
     </span>
     <v-snackbar v-model="noArtist" :timeout="3000"
       >Não encontrado! Tente novamente.</v-snackbar
@@ -23,26 +38,54 @@ form {
   margin: 16px 0;
   position: relative;
 
+  #search-form-item {
+    &--bar,
+    &--button {
+      margin: 8px 0;
+
+      @media screen and (min-width: 601px) {
+        display: inline-block;
+        margin: 8px;
+      }
+    }
+  }
+
   &.no-artist {
     animation: no-artist;
-    animation-duration: 0.25s;
-    animation-iteration-count: 3;
+    animation-duration: 0.15s;
+    animation-iteration-count: 2;
     animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
   }
 
   .loading-icon {
     animation: loading-icon;
     animation-duration: 1s;
-    // animation-fill-mode: forwards;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     display: inline-block;
-    position: absolute;
-    right: -60px;
-    top: 0;
     display: block;
     width: 50px;
     height: 50px;
+    position: absolute;
+
+    @media screen and (max-width: 600px) {
+      margin: auto;
+      right: 0;
+      left: 0;
+    }
+
+    @media screen and (min-width: 601px) {
+      right: -60px;
+      bottom: 5px;
+    }
+  }
+
+  input {
+    background-color: $background-input;
+    border-bottom: 2px solid $inteli-green;
+    color: $color-font-main;
+    padding: 8px;
   }
 
   @keyframes no-artist {
@@ -76,14 +119,8 @@ form {
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import searchButton from './searchButton';
-import searchBar from './searchBar';
 
 export default {
-  components: {
-    searchButton,
-    searchBar
-  },
   data() {
     return {
       result: null,
@@ -103,7 +140,9 @@ export default {
       setSearchResult: 'search/setSearchResult',
       setArtistBio: 'search/setArtistBio',
       setVideosList: 'search/setVideosList',
-      setLoadingSearch: 'search/setLoadingSearch'
+      setLoadingSearch: 'search/setLoadingSearch',
+      setSearchQuery: 'search/setSearchQuery',
+      updateSearchQuery: 'search/setSearchQuery'
     }),
     searchNoArtist() {
       this.noArtist = true;
@@ -116,10 +155,13 @@ export default {
         this.setLoadingSearch(true);
         const getArtistTicketMaster = () =>
           new Promise((resolve, reject) => {
+            const tmURL = `${
+              this.apiInfo.ticketmasterApiUrl
+            }/attractions.json?keyword=${this.searchQuery.trim()}&size=1&apikey=${
+              this.apiInfo.ticketmasterApiKey
+            }`;
             this.$axios
-              .get(
-                `${this.apiInfo.ticketmasterApiUrl}/attractions.json?keyword=${this.searchQuery}&size=1&apikey=${this.apiInfo.ticketmasterApiKey}`
-              )
+              .get(tmURL)
               .then(response => {
                 resolve(response.data._embedded.attractions[0]);
               })
@@ -132,10 +174,9 @@ export default {
           .then(tmData => {
             this.result = tmData;
             this.setSearchResult(this.result);
+            const lfURL = `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`;
             this.$axios
-              .get(
-                `${this.apiInfo.lastFmApiUrl}/?method=artist.getinfo&artist=${this.result.name}&api_key=${this.apiInfo.lastFmApiKey}&format=json`
-              )
+              .get(lfURL)
               .then(lfData => {
                 this.setArtistBio(lfData.data.artist.bio.content);
 

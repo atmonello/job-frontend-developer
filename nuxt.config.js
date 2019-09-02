@@ -60,7 +60,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/getFormattedDate.js'],
+  plugins: ['~/plugins/getFormattedDate.js', '~/plugins/vueMq.js'],
   /*
    ** Nuxt.js dev-modules
    */

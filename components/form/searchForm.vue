@@ -6,11 +6,17 @@
     @submit.prevent="searchArtist"
   >
     <div id="search-form-item--bar">
-      <input
+      <!-- <input
         type="text"
         placeholder="Digite um artista"
         @input="updateSearchQuery($event.target.value)"
-      />
+      /> -->
+      <v-text-field
+        light
+        append-icon="mdi-magnify"
+        messages="Digite um artista"
+        @input.native="updateSearchQuery($event.target.value)"
+      ></v-text-field>
     </div>
     <div id="search-form-item--button">
       <v-btn dark large rounded depressed :disabled="!searchQuery" type="submit"

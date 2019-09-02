@@ -4,7 +4,7 @@
 
 ## Como acessar
 
-Basta acessar o link [https://atmonello-intelipost.surge.sh/](https://atmonello-intelipost.surge.sh/).
+Basta acessar o link [https://atmonello-intelipost.surge.sh/](http://bit.ly/2ltTTbG).
 
 ## Como rodar localmente
 

@@ -17,7 +17,7 @@ Durante o desenvolvimento foi utilizado o [Surge](https://surge.sh/), bastando i
 
 ## Tecnologias utilizadas
 
-O projeto foi desenvolvido usando o [Nuxt.js](https://nuxtjs.org) e [Vuetify](https://vuetifyjs.com).
+O projeto foi desenvolvido usando o [Nuxt.js](https://nuxtjs.org) e, para estudar, inclui também [Vuetify](https://vuetifyjs.com), além do que era solicitado. Também fiz uma consulta na API pública da Last.fm, além da Ticketmaster e Youtube.
 
 ## Bugs ainda não resolvidos
 
